@@ -2,26 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.connect-btn {
+  box-shadow: -2px -2px #e0dede, -2px 0 #e0dede, 0 -2px #e0dede, -4px -4px white,
+    -4px 0 white, 0 -4px white, 2px 2px #818181, 0 2px #818181, 2px 0 #818181,
+    2px -2px #e0dede, -2px 2px #818181, -4px 2px white, -4px 4px black,
+    4px 4px black, 4px 0 black, 0 4px black, 2px -4px white, 4px -4px black;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.connect-btn:active {
+  box-shadow: -2px -2px #818181, -2px 0 #818181, 0 -2px #818181, -4px -4px black,
+    -4px 0 black, 0 -4px black, 2px 2px #e0dede, 0 2px #e0dede, 2px 0 #e0dede,
+    2px -2px #818181, -2px 2px #e0dede, -4px 2px black, -4px 4px white,
+    4px 4px white, 4px 0 white, 0 4px white, 2px -4px black, 4px -4px white;
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.display-value-box {
+  box-shadow: 0 4px #7d7d7d, 0 -4px #7d7d7d, -4px -4px #7d7d7d, 4px 4px #7d7d7d,
+    -4px 4px #7d7d7d, 4px -4px #7d7d7d;
+}
+.add-subtract {
+  box-shadow: -2px -2px #e0dede, -2px 0 #e0dede, 0 -2px #e0dede, -4px -4px white,
+    -4px 0 white, 0 -4px white, 2px 2px #818181, 0 2px #818181, 2px 0 #818181,
+    2px -2px #e0dede, -2px 2px #818181, -4px 2px white, -4px 4px black,
+    4px 4px black, 4px 0 black, 0 4px black, 2px -4px white, 4px -4px black;
+}
+.add-subtract:active {
+  box-shadow: -2px -2px #818181, -2px 0 #818181, 0 -2px #818181, -4px -4px black,
+    -4px 0 black, 0 -4px black, 2px 2px #e0dede, 0 2px #e0dede, 2px 0 #e0dede,
+    2px -2px #818181, -2px 2px #e0dede, -4px 2px black, -4px 4px white,
+    4px 4px white, 4px 0 white, 0 4px white, 2px -4px black, 4px -4px white;
+}
+.input-box {
+  box-shadow: -2px -2px #818181, -2px 0 #818181, 0 -2px #818181, -4px -4px black,
+    -4px 0 black, 0 -4px black, 2px 2px #e0dede, 0 2px #e0dede, 2px 0 #e0dede,
+    2px -2px #818181, -2px 2px #e0dede, -4px 2px black, -4px 4px white,
+    4px 4px white, 4px 0 white, 0 4px white, 2px -4px black, 4px -4px white;
+}
+.footer-bar {
+  background: #c0c0c0;
+  height: 2.5rem;
+  display: flex;
+  padding: 0.5rem;
+  z-index: 999999999;
+  justify-content: space-between;
+  box-shadow: 0 -2px #fffdfc, 0 -4px #cce9eb;
+}
+.mwBtn {
+  box-shadow: -2px -2px #e0dede, -2px 0 #e0dede, 0 -2px #e0dede, -4px -4px white,
+    -4px 0 white, 0 -4px white, 2px 2px #818181, 0 2px #818181, 2px 0 #818181,
+    2px -2px #e0dede, -2px 2px #818181, -4px 2px white, -4px 4px black,
+    4px 4px black, 4px 0 black, 0 4px black, 2px -4px white, 4px -4px black;
 }
