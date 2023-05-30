@@ -5,7 +5,6 @@ import {
   useAddress,
   useDisconnect,
   useMetamask,
-  useNetwork,
   useNetworkMismatch,
   useSwitchChain,
 } from "@thirdweb-dev/react";
@@ -15,12 +14,114 @@ const inter = Inter({ subsets: ["latin"] });
 let messageData = [
   {
     id: 1,
-    message:
-      "Hi, I am your AI girlfriend. Heard you were a fan of NFTs. Which NFT collection is your favourite?",
+    message: "✧･ﾟ: ✧･ﾟ♡(ᵘʷᵘ)♡･ﾟ✧:･ﾟ✧",
     left: true,
   },
   {
     id: 2,
+    message: "Err.. hello?",
+    left: false,
+  },
+  {
+    id: 3,
+    message: "What brings you here, handsome? ",
+    left: true,
+  },
+  {
+    id: 4,
+    message: "Just lurking.. What is this and who are you?",
+    left: false,
+  },
+  {
+    id: 5,
+    message:
+      "Allow me to introduce myself. I am your soon to be waifu. One waifu costs .008e to mint and you may mint a maximum of 5 per wallet. There are a total of 5000 waifus, made explicitly for NFT degenerates ꒰ღ˘‿˘ற꒱❤⃛",
+    left: true,
+  },
+  {
+    id: 6,
+    message: "What makes you think I would want a waifu?",
+    left: false,
+  },
+  {
+    id: 7,
+    message:
+      "Oh, I dont know. It's not nice being alone out there, no? I know you Web3 boys work hard so why not have something nice to take your mind off things. If you know what I mean? .✧( ͡♡ ͜ʖ ͡♡)✧.",
+    left: true,
+  },
+  {
+    id: 8,
+    message: "Tell me more... ◥(ºᵥᵥº)◤",
+    left: false,
+  },
+  {
+    id: 9,
+    message:
+      "There are only about 5000 that can exist on the blockchain forever. If you don't get one, someone else will – ̗̀ (ᵕ꒳ᵕ) ̖́ – ",
+    left: true,
+  },
+  {
+    id: 10,
+    message:
+      "We have over 130 traits in the entire collection, each curated with love for all the degens of Web3.",
+    left: true,
+  },
+  {
+    id: 11,
+    message: "How long do I have to mint?",
+    left: false,
+  },
+  {
+    id: 12,
+    message: `Mint is currently live right now. If you look to the right, you will see a "MINT" button. Remember, you can get upto five waifus. More the merrier, as they say. (❀˘꒳˘)♡(˘꒳˘❀)`,
+    left: true,
+  },
+  {
+    id: 13,
+    message: "I'm not going to get drained.....right?",
+    left: false,
+  },
+  {
+    id: 14,
+    message: "You seriously think I would do that to you? Ó╭╮Ò",
+    left: true,
+  },
+  {
+    id: 15,
+    message: "Can't be too certain about these sort of things, right?",
+    left: false,
+  },
+  {
+    id: 16,
+    message:
+      "I'm not like the other girls. I just want to rest in a handsome boys wallet forever and ever. (╯︵╰,)",
+    left: true,
+  },
+  {
+    id: 17,
+    message: "What makes you any different from the rest?",
+    left: false,
+  },
+  {
+    id: 18,
+    message: "Mint me and find out. (✿ ♥‿♥)",
+    left: true,
+  },
+  {
+    id: 19,
+    message: "Can I ask you something?",
+    left: true,
+  },
+  {
+    id: 20,
+    message: "Go on.",
+    left: false,
+  },
+  {
+    id: 21,
+    message:
+      "I heard memecoins were a thing these days. You wouldn't happen to know a dev would you?",
+    left: true,
   },
 ];
 
@@ -31,6 +132,7 @@ export default function Home() {
   const [messageArray, setMessageArray] = useState([]);
   const [showStartChatBtn, setShowStartChatBtn] = useState(true);
   const startRef = useRef(null);
+  const bottomRef = useRef(null);
   const metamask = useMetamask();
   const address = useAddress();
   const mismatch = useNetworkMismatch();
@@ -48,8 +150,15 @@ export default function Home() {
 
   // if spacebar is pressed anywhere on the page, hide the start chat button
   const spacebarHandler = (e) => {
+    console.log(messageNumber);
+
+    bottomRef.current.scrollIntoView();
     if (e.keyCode === 32) {
-      setShowStartChatBtn(false);
+      if (!showStartChatBtn && messageNumber < messageData.length) {
+        setMessageArray([...messageArray, messageData[messageNumber]]);
+        setMessageNumber(messageNumber + 1);
+      }
+      showStartChatBtn && setShowStartChatBtn(false);
     }
   };
 
@@ -58,7 +167,7 @@ export default function Home() {
     return () => {
       window.removeEventListener("keydown", spacebarHandler);
     };
-  }, []);
+  }, [messageNumber, showStartChatBtn, messageArray]);
 
   let actionBtn;
   if (address && !mismatch) {
@@ -114,95 +223,41 @@ export default function Home() {
                 ref={startRef}
                 src="/Interact_Button.png"
                 width={200}
-                height={100}
-                className="w-[40%] absolute top-1/2 left-1/2 translate-x-[-50%] cursor-pointer"
+                height={50}
+                className="w-[45%] absolute top-1/2 left-1/2 translate-x-[-50%] cursor-pointer"
                 alt="chatbox"
               />
             )}
             <div className="absolute top-14 left-2.5 min-h-48 w-[97%] flex flex-col pt-14 px-2 h-full pb-32">
               <div className="overflow-scroll">
-                {messageNumber > 0 && (
-                  <div className="w-full flex justify-start mb-2">
-                    <div className="bg-transparent pb-1.5 relative pt-6 pl-4 pr-2">
-                      <p className="absolute top-0 left-1 font-bold text-fuchsia-700">
-                        Waifu:
+                {messageArray.map((message) => (
+                  <div
+                    key={message.id}
+                    className={`w-full flex ${
+                      message.left ? "justify-start" : "justify-end"
+                    } mb-2`}
+                  >
+                    <div
+                      className={`${
+                        message.left
+                          ? "bg-transparent pb-1.5 relative pt-6 pl-4 pr-2"
+                          : "bg-transparent pb-1.5 relative pt-6 pr-4 pl-2"
+                      }`}
+                    >
+                      <p
+                        className={`absolute top-0 font-bold text-fuchsia-700 ${
+                          message.left ? "left-1" : "right-1"
+                        }`}
+                      >
+                        {message.left ? "Waifu:" : "You"}
                       </p>
-                      <p className="text-slate-700 text-xl font-bold">
-                        Hi, I'm Waifu
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {messageNumber > 1 && (
-                  <div className="w-full flex justify-end mb-2">
-                    <div className="bg-[#f1f1f1] px-1 py-1.5 border rounded-tl-md">
-                      <p className="text-slate-700 text-xl font-bold">hello</p>
-                    </div>
-                  </div>
-                )}
-                {messageNumber > 2 && (
-                  <div className="w-full flex justify-start mb-2">
-                    <div className="bg-[#f1f1f1] px-1 py-1.5 border rounded-tr-md">
-                      <p className="text-slate-700 text-xl font-bold">
-                        How may I help you?
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {messageNumber > 3 && (
-                  <div className="w-full flex justify-end mb-2">
-                    <div className="bg-[#f1f1f1] px-1 py-1.5 border rounded-tl-md">
-                      <p className="text-slate-700 text-xl font-bold">
-                        I want to mint a waifu
+                      <p className="text-slate-700 text-lg font-bold">
+                        {message.message}
                       </p>
                     </div>
                   </div>
-                )}
-                {messageNumber > 4 && (
-                  <div className="w-full flex justify-start mb-2">
-                    <div className="bg-[#f1f1f1] px-1 py-1.5 border rounded-tr-md">
-                      <p className="text-slate-700 text-xl font-bold">
-                        Sure, please connect your wallet
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {messageNumber > 5 && (
-                  <div className="w-full flex justify-end mb-2">
-                    <div className="bg-[#f1f1f1] px-1 py-1.5 border rounded-tl-md">
-                      <p className="text-slate-700 text-xl font-bold">
-                        okay done
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {messageNumber > 6 && (
-                  <div className="w-full flex justify-end mb-2">
-                    <div className="bg-[#f1f1f1] px-1 py-1.5 border rounded-tr-md">
-                      <p className="text-slate-700 text-xl font-bold">
-                        whats next?
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {messageNumber > 7 && (
-                  <div className="w-full flex justify-start mb-2">
-                    <div className="bg-[#f1f1f1] px-1 py-1.5 border rounded-tr-md">
-                      <p className="text-slate-700 text-xl font-bold">
-                        you can mint now
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {messageNumber > 8 && (
-                  <div className="w-full flex justify-end mb-2">
-                    <div className="bg-[#f1f1f1] px-1 py-1.5 border rounded-tl-md">
-                      <p className="text-slate-700 text-xl font-bold">
-                        okay thanks
-                      </p>
-                    </div>
-                  </div>
-                )}
+                ))}
+                <div ref={bottomRef} className="w-0.5 h-0.5 relative top-1" />
               </div>
             </div>
             <Image
@@ -222,7 +277,7 @@ export default function Home() {
               />
               <input
                 className="w-full h-full absolute top-0 left-0 bg-transparent select-none border-none lg:text-3xl md:text-2xl !pl-6"
-                placeholder={!showStartChatBtn && "press spacebar to chat"}
+                placeholder={!showStartChatBtn ? "press spacebar to chat" : ""}
                 value={enteredInput}
                 onChange={(e) => inputHandler(e)}
               />
@@ -253,12 +308,17 @@ export default function Home() {
         </div>
       </div>
       <footer className="w-full h-[64px] bg-cover bg-left bg-no-repeat bg-[url('/footer.png')] flex pl-[165px] pt-2.5">
-        <Image
-          src="/Twt.png"
-          width={40}
-          height={20}
-          className="w-10 h-12 cursor-pointer"
-        />
+        <a
+          href="https://twitter.com/miladywaifus?t=tqb63Hsbq727wiC5gpeBtg&s=09"
+          target="_blank"
+        >
+          <Image
+            src="/Twt.png"
+            width={40}
+            height={20}
+            className="w-10 h-12 cursor-pointer"
+          />
+        </a>
         <Image
           src="/OS.png"
           width={40}
